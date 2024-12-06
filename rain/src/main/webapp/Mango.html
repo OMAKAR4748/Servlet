@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mango Details Form</title>
+</head>
+<body>
+<h1>Mango Details Form</h1>
+<form action="fifth">
+    <label for="types">Type:</label>
+    <select id="types" name="Type" required>
+        <option value="Alphonso">Alphonso</option>
+        <option value="Kesar">Kesar</option>
+        <option value="Dasheri">Dasheri</option>
+    </select><br><br>
+
+    <label for="grown_In">Grown In:</label>
+    <input type="text" id="grown_In" name="Grown In" required><br><br>
+
+    <label for="imported">Imported:</label>
+    <select id="imported" name="Imported" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select><br><br>
+
+    <label for="color">Color:</label>
+    <input type="text" id="color" name="Color" required><br><br>
+
+    <label for="pricePerKG">Price per KG:</label>
+    <input type="number" id="pricePerKG" name="Price per KG" step="0.01" required><br><br>
+
+    <label for="season">Season:</label>
+    <select id="season" name="Season" required>
+        <option value="Summer">Summer</option>
+        <option value="Winter">Winter</option>
+        <option value="Monsoon">Monsoon</option>
+        <option value="Spring">Spring</option>
+    </select><br><br>
+
+    <label for="supplier">Supplier:</label>
+    <input type="text" id="supplier" name="Supplier" required><br><br>
+
+    <label for="quality">Quality:</label>
+    <select id="quality" name="Quality" required>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+    </select><br><br>
+
+    <label for="weight">Weight:</label>
+    <input type="number" id="weight" name="Weight" step="0.01" required><br><br>
+
+    <label for="harvestDate">Harvest Date:</label>
+    <input type="date" id="harvestDate" name="Harvest Date" required><br><br>
+
+    <label for="storageTemp">Storage Temperature:</label>
+    <input type="number" id="storageTemp" name="Storage Temperature" step="0.1" required><br><br>
+
+    <label for="ripeness">Ripeness Level:</label>
+    <select id="ripeness" name="Ripeness Level" required>
+        <option value="Unripe">Unripe</option>
+        <option value="Ripe">Ripe</option>
+        <option value="Overripe">Overripe</option>
+    </select><br><br>
+
+    <label for="taste">Taste:</label>
+    <input type="text" id="taste" name="Taste" required><br><br>
+
+    <label for="pesticides">Pesticides Used:</label>
+    <select id="pesticides" name="Pesticides Used" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select><br><br>
+
+    <label for="packingDate">Packing Date:</label>
+    <input type="date" id="packingDate" name="Packing Date" required><br><br>
+
+    <label for="transportMethod">Transport Method:</label>
+    <select id="transportMethod" name="Transport Method" required>
+        <option value="Air">Air</option>
+        <option value="Sea">Sea</option>
+        <option value="Land">Land</option>
+    </select><br><br>
+
+    <label for="distributionCenter">Distribution Center:</label>
+    <input type="text" id="distributionCenter" name="Distribution Center" required><br><br>
+
+    <label for="certification">Certification:</label>
+    <select id="certification" name="Certification" required>
+        <option value="Organic">Organic</option>
+        <option value="Non-Organic">Non-Organic</option>
+        <option value="Fair Trade">Fair Trade</option>
+    </select><br><br>
+
+    <label for="batchNumber">Batch Number:</label>
+    <input type="text" id="batchNumber" name="Batch Number" required><br><br>
+
+    <label for="organic">Organic:</label>
+    <select id="organic" name="Organic" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select><br><br>
+
+    <label for="region">Region:</label>
+    <select id="region" name="Region" required>
+        <option value="North">North</option>
+        <option value="South">South</option>
+        <option value="East">East</option>
+        <option value="West">West</option>
+    </select><br><br>
+
+    <label for="farmName">Farm Name:</label>
+    <input type="text" id="farmName" name="Farm Name" required><br><br>
+
+    <label for="nutritionalValue">Nutritional Value:</label>
+    <input type="text" id="nutritionalValue" name="Nutritional Value" required><br><br>
+
+    <label for="texture">Texture:</label>
+    <select id="texture" name="Texture" required>
+        <option value="Smooth">Smooth</option>
+        <option value="Fibrous">Fibrous</option>
+    </select><br><br>
+
+    <label for="humidity">Humidity:</label>
+    <input type="number" id="humidity" name="Humidity" step="0.1" required><br><br>
+
+    <label for="sunlight">Sunlight Exposure:</label>
+    <input type="text" id="sunlight" name="Sunlight Exposure" required><br><br>
+
+    <label for="soilType">Soil Type:</label>
+    <select id="soilType" name="Soil Type" required>
+        <option value="Loamy">Loamy</option>
+        <option value="Clay">Clay</option>
+        <option value="Sandy">Sandy</option>
+    </select><br><br>
+
+    <label for="wateringFrequency">Watering Frequency:</label>
+    <select id="wateringFrequency" name="Watering Frequency" required>
+        <option value="Daily">Daily</option>
+        <option value="Weekly">Weekly</option>
+        <option value="Bi-Weekly">Bi-Weekly</option>
+    </select><br><br>
+
+    <label for="fruitSize">Fruit Size:</label>
+    <select id="fruitSize" name="Fruit Size" required>
+        <option value="Small">Small</option>
+        <option value="Medium">Medium</option>
+        <option value="Large">Large</option>
+    </select><br><br>
+
+    <label for="fruitShape">Fruit Shape:</label>
+    <select id="fruitShape" name="Fruit Shape" required>
+        <option value="Oval">Oval</option>
+        <option value="Round">Round</option>
+        <option value="Elliptical">Elliptical</option>
+    </select><br><br>
+
+    <label for="treeHeight">Tree Height:</label>
+    <input type="text" id="treeHeight" name="Tree Height" required><br><br>
+
+    <label for="treeAge">Tree Age:</label>
+    <input type="text" id="treeAge" name="Tree Age" required><br><br>
+
+    <input type="submit" value="Submit">
+
+</form>
+</body>
+</html>

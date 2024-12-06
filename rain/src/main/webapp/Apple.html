@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Apple Details Form</h1>
+    <form action="third">
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" required><br><br>
+
+        <label for="grownIn">Grown In:</label>
+        <input type="text" id="grownIn" name="grownIn" required><br><br>
+
+        <label for="imported">Imported:</label>
+        <select id="imported" name="imported" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="color">Color:</label>
+        <input type="text" id="color" name="color" required><br><br>
+
+        <label for="pricePerKG">Price per KG:</label>
+        <input type="number" id="pricePerKG" name="pricePerKG" step="0.01" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>
