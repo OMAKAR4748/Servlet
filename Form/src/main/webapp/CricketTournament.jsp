@@ -181,6 +181,15 @@
             padding: 10px 15px;
         }
     }
+ form .btn-secondary {
+        background-color:  #FF0000;
+        color: #212529; 
+    }
+
+    form .btn-secondary:hover {
+        background-color:  #FF0000;
+        transform: translateY(-2px);
+    }
     </style>
 </head>
 <body>
