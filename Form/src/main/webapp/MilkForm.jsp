@@ -169,6 +169,15 @@
             font-size: 0.9rem;
         }
     }
+ form .btn-secondary {
+        background-color:  #FF0000;
+        color: #212529; /* Dark text */
+    }
+
+    form .btn-secondary:hover {
+        background-color:  #FF0000;
+        transform: translateY(-2px);
+    }
 
 
     </style>
