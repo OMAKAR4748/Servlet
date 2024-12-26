@@ -1,46 +1,50 @@
 package com.xworkz.servlet.repository;
 
 import com.xworkz.servlet.dto.CricketTournamentDto;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CricketTournamentRepositoryImpl implements CricketTournamentRepository{
-   private CricketTournamentRepository cricketTournamentRepository = new CricketTournamentRepositoryImpl();
+public class CricketTournamentRepositoryImpl implements CricketTournamentRepository {
+
     @Override
     public boolean save(CricketTournamentDto cricketTournamentDto) {
-        System.out.println("saved");
-        Connection connection = null;
-        Statement statement = null;
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("connection successful");
-            String url = "jdbc:mysql://localhost:3306/xworkz";
-            String username = "root";
-            String password = "root";
-            connection = DriverManager.getConnection(url, username, password);
-            System.out.println(" jdbc connected succesfully");
-
-            String insert = "insert into CricketTournament values(0,'"+cricketTournamentDto.getTeamName()+"',"+cricketTournamentDto.getCaptainName()+","+cricketTournamentDto.getContactNumber()+",'"+cricketTournamentDto.getEmail()+"','"+cricketTournamentDto.getNumPlayers()+"','"+cricketTournamentDto.getCoachName()+"','"+cricketTournamentDto.getHomeGround()+"','"+cricketTournamentDto.getSponsorsName()+"')";
-
-            statement = connection.createStatement();
-
-            int row = statement.executeUpdate(insert);
-            System.out.println("no of rows inserted :" + row);
-
-        } catch (ClassNotFoundException | SQLException c) {
-            System.out.println("jdbc class not found" + c.getMessage());
-
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                save(cricketTournamentDto);
-            }
-        }
         return true;
+    }
+
+    @Override
+    public List<CricketTournamentDto> getAllCricketForm() {
+        List<CricketTournamentDto> cricketTournaments = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/xworkz", "root", "root");
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM crickettournament")) {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            while (resultSet.next()) {
+                String teamName = resultSet.getString("teamName");
+                String captainName = resultSet.getString("captainName");
+                String contactNumber = resultSet.getString("contactNumber");
+                String email = resultSet.getString("email");
+                int numPlayers = resultSet.getInt("numPlayers");
+                String coachName = resultSet.getString("coachName");
+                String homeGround = resultSet.getString("homeGround");
+                String sponsorsName = resultSet.getString("sponsorsName");
+
+                CricketTournamentDto cricketTournament = new CricketTournamentDto(teamName, captainName, contactNumber, email, numPlayers, coachName, homeGround, sponsorsName);
+                cricketTournaments.add(cricketTournament);
+
+//                System.out.println("Number of cricket tournaments: " + cricketTournaments.size());
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return cricketTournaments;
     }
 }
