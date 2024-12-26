@@ -12,10 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 
 @WebServlet(urlPatterns = "/SweetFormServlet", loadOnStartup = 1)
 public class SweetFormServlet extends HttpServlet {
+
+    private SweetService sweetService = new SweetServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -74,5 +78,15 @@ public class SweetFormServlet extends HttpServlet {
         }
 
         System.out.println(success ? "Successfully Registered..." : "Registration Failed...");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
+        List<SweetFormDto> sweetForms = sweetService.getAllSweetForms();
+        req.setAttribute("sweetForms", sweetForms);
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("SweetResult.jsp");
+        requestDispatcher.forward(req, resp);
     }
 }
