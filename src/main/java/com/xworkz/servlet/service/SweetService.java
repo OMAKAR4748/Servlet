@@ -1,8 +1,14 @@
 package com.xworkz.servlet.service;
 
 import com.xworkz.servlet.dto.SweetFormDto;
+import java.util.List;
 
 public interface SweetService {
 
-    public boolean save(SweetFormDto dto);
+    boolean save(SweetFormDto dto);
+
+    default List<SweetFormDto> getAllSweetForms() {
+        return getAllSweetForms();
+    }
+
 }
