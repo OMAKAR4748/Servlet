@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(urlPatterns = "/CricketTournamentServlet", loadOnStartup = 1)
 public class CricketTournamentServlet extends HttpServlet {
-    public CricketTournamentServlet()
-    {
-        System.out.println("running in CricketTournamentServlet");
-    }
+
+    private CricketService cricketService = new CricketServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,7 +37,7 @@ public class CricketTournamentServlet extends HttpServlet {
         boolean result =cricketService.save(tournamentForm);
         if (result ==true)
         {
-            req.setAttribute("message",teamName+" match led by " + captainName + " they shared the contact number "+ contactNumber + " and "+email+",and number of players is "+ numPlayers + " and this team coach name is "+ coachName + " and home ground "+ homeGround + " and sponsor by "+ sponsorsName);
+            req.setAttribute("message ",teamName+  "   "  + captainName +  "   "+ contactNumber + "    "  +email+  "  "+ numPlayers + "   "  + coachName +  "     "+ homeGround + "    "+ sponsorsName);
 
         }else {
             req.setAttribute("message","not saved");
@@ -47,5 +46,15 @@ public class CricketTournamentServlet extends HttpServlet {
         requestDispatcher.forward(req, resp);
 
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
+        List<CricketTournamentDto> cricketTournaments = cricketService.getAllCricketForm();
+        req.setAttribute("cricketTournaments", cricketTournaments);
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("CricketResult.jsp");
+        requestDispatcher.forward(req, resp); }
+
 
 }
