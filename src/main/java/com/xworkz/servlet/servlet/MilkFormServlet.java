@@ -12,10 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = "/MilkFormServlet", loadOnStartup = 1)
 public class MilkFormServlet extends HttpServlet {
+
+    private MilkService milkService = new MilkServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +47,7 @@ public class MilkFormServlet extends HttpServlet {
         boolean result =milkService.save(milkForm);
         if (result ==true)
         {
-            req.setAttribute("message",brand+ " the Cost for " + type + " milk is : " +quantity+ " "+ totalPrice);
+            req.setAttribute("message",brand+ " the Cost for " + type + " milk is : " +quantity+ " total cost is:  "+ totalPrice);
 
         }else {
             req.setAttribute("message","not saved");
@@ -52,7 +55,15 @@ public class MilkFormServlet extends HttpServlet {
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("MilkForm.jsp");
         requestDispatcher.forward(req, resp);
-
-
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<MilkFormDto> milkForms = milkService.getAllMilkForms();
+        req.setAttribute("list", milkForms);
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("MilkResult.jsp");
+        requestDispatcher.forward(req, resp);
+    }
+
 }
