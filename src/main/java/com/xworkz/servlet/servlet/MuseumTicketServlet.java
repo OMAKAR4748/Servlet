@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @WebServlet(urlPatterns = "/MuseumTicketServlet", loadOnStartup = 1)
 public class MuseumTicketServlet extends HttpServlet {
 
+    private MuseumService museumService = new MuseumServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,14 +29,9 @@ public class MuseumTicketServlet extends HttpServlet {
         int ADULT_TICKET_PRICE = 100;
         int CHILD_TICKET_PRICE = 50;
 
-        Map<String,Integer> map =new HashMap<>();
-        map.put("adult",100);
-        map.put("child",50);
-
         int adultTotal = adultMembers * ADULT_TICKET_PRICE;
         int childTotal = childMembers * CHILD_TICKET_PRICE;
         int totalPrice = adultTotal + childTotal;
-
 
         MuseumTicketFormDto ticketForm = new MuseumTicketFormDto(customerName, adultTotal, childTotal , mobileNo, email);
         req.setAttribute("ticketForm", ticketForm);
@@ -44,20 +39,24 @@ public class MuseumTicketServlet extends HttpServlet {
         req.setAttribute("childTotal", childTotal);
         req.setAttribute("totalPrice", totalPrice);
 
-
-        MuseumService museumService = new MuseumServiceImpl();
-        boolean result =museumService.save(ticketForm);
-        if (result ==true)
-        {
-            req.setAttribute("message",customerName+ " and thier adults museum cost is "+adultTotal+ " and their childrens museum cost is" +childTotal+ " mobile number  " +mobileNo+ " and email id  " +email );
-
-        }else {
-            req.setAttribute("message","not saved");
+        boolean result = museumService.save(ticketForm);
+        if (result) {
+            req.setAttribute("message", customerName + " and their adults' museum cost is " + adultTotal + " and their children's museum cost is " + childTotal + " mobile number " + mobileNo + " and email id " + email);
+        } else {
+            req.setAttribute("message", "not saved");
         }
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("MusuemTicketForm.jsp");
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("MuseumTicketForm.jsp");
         requestDispatcher.forward(req, resp);
 
-        System.out.println("Successfully Register...");
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<MuseumTicketFormDto> museumTickets = museumService.getAllMusemTicketForm();
+        req.setAttribute("museumTickets", museumTickets);
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("MuseumResult.jsp");
+        requestDispatcher.forward(req, resp);
     }
 }
