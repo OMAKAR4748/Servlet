@@ -13,6 +13,7 @@ public class MilkRepositoryImpl implements MilkRepository{
         System.out.println("MilkRepositoryImpl is saved");
 
         Connection connection = null;
+        Statement statement = null;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -22,10 +23,9 @@ public class MilkRepositoryImpl implements MilkRepository{
             String password = "root";
             connection = DriverManager.getConnection(url, username, password);
             System.out.println(" jdbc connected succesfully");
-
             String insert = "insert into MilkForm values(0,'"+milkFormDto.getBrand()+ "','"+milkFormDto.getType()+"',"+milkFormDto.getQuantity()+","+milkFormDto.getTotalPrice()+")";
 
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
 
             int row = statement.executeUpdate(insert);
             System.out.println("no of rows inserted :" + row);
@@ -37,7 +37,7 @@ public class MilkRepositoryImpl implements MilkRepository{
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                save(milkFormDto);
             }
         }
         return true;

@@ -12,6 +12,7 @@ public class SweetRepositoryImpl implements SweetRepository{
     public boolean save(SweetFormDto sweetFormDto) {
 
         Connection connection = null;
+        Statement statement = null;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -24,7 +25,7 @@ public class SweetRepositoryImpl implements SweetRepository{
 
             String insert = "insert into SweetForm values(0,'"+sweetFormDto.getShopName()+"','"+sweetFormDto.getSweetName()+"',"+sweetFormDto.getWeight()+","+sweetFormDto.getQuantity()+","+sweetFormDto.getPrice()+")";
 
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
 
             int row = statement.executeUpdate(insert);
             System.out.println("no of rows inserted :" + row);
@@ -36,7 +37,7 @@ public class SweetRepositoryImpl implements SweetRepository{
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                save(sweetFormDto);
             }
         }
         return true;

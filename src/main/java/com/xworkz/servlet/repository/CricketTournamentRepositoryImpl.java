@@ -13,6 +13,7 @@ public class CricketTournamentRepositoryImpl implements CricketTournamentReposit
     public boolean save(CricketTournamentDto cricketTournamentDto) {
         System.out.println("saved");
         Connection connection = null;
+        Statement statement = null;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -25,7 +26,7 @@ public class CricketTournamentRepositoryImpl implements CricketTournamentReposit
 
             String insert = "insert into CricketTournament values(0,'"+cricketTournamentDto.getTeamName()+"',"+cricketTournamentDto.getCaptainName()+","+cricketTournamentDto.getContactNumber()+",'"+cricketTournamentDto.getEmail()+"','"+cricketTournamentDto.getNumPlayers()+"','"+cricketTournamentDto.getCoachName()+"','"+cricketTournamentDto.getHomeGround()+"','"+cricketTournamentDto.getSponsorsName()+"')";
 
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
 
             int row = statement.executeUpdate(insert);
             System.out.println("no of rows inserted :" + row);
