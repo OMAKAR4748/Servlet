@@ -14,6 +14,7 @@ public class MuseumRepositoryImpl implements MuseumRepository{
         System.out.println("saved");
 
         Connection connection = null;
+        Statement statement = null;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -26,7 +27,7 @@ public class MuseumRepositoryImpl implements MuseumRepository{
 
             String insert = "insert into MuseumTicketForm values(0,'"+museumTicketFormDto.getCustomerName()+"',"+museumTicketFormDto.getAdultMembers()+","+museumTicketFormDto.getChildMembers()+",'"+museumTicketFormDto.getMobileNo()+"','"+museumTicketFormDto.getEmail()+"')";
 
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
 
             int row = statement.executeUpdate(insert);
             System.out.println("no of rows inserted :" + row);
@@ -38,7 +39,7 @@ public class MuseumRepositoryImpl implements MuseumRepository{
             try {
                 connection.close();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                save(museumTicketFormDto);
             }
         }
 
